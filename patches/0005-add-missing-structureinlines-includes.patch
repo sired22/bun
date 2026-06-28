@@ -1,0 +1,1567 @@
+diff --git a/Source/JavaScriptCore/API/JSAPIGlobalObject.cpp b/Source/JavaScriptCore/API/JSAPIGlobalObject.cpp
+index bea979b8..2d46675a 100644
+--- a/Source/JavaScriptCore/API/JSAPIGlobalObject.cpp
++++ b/Source/JavaScriptCore/API/JSAPIGlobalObject.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSAPIGlobalObject.h"
+ 
+ #include "GlobalObjectMethodTable.h"
+diff --git a/Source/JavaScriptCore/API/JSAPIValueWrapper.cpp b/Source/JavaScriptCore/API/JSAPIValueWrapper.cpp
+index ac14d5b7..d936798b 100644
+--- a/Source/JavaScriptCore/API/JSAPIValueWrapper.cpp
++++ b/Source/JavaScriptCore/API/JSAPIValueWrapper.cpp
+@@ -21,6 +21,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSAPIValueWrapper.h"
+ 
+ #include "JSCellInlines.h"
+diff --git a/Source/JavaScriptCore/API/JSCallbackObject.cpp b/Source/JavaScriptCore/API/JSCallbackObject.cpp
+index e2866d17..43c29403 100644
+--- a/Source/JavaScriptCore/API/JSCallbackObject.cpp
++++ b/Source/JavaScriptCore/API/JSCallbackObject.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSCallbackObject.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/bytecode/AdaptiveInferredPropertyValueWatchpointBase.cpp b/Source/JavaScriptCore/bytecode/AdaptiveInferredPropertyValueWatchpointBase.cpp
+index 6465d6e9..0c64cec2 100644
+--- a/Source/JavaScriptCore/bytecode/AdaptiveInferredPropertyValueWatchpointBase.cpp
++++ b/Source/JavaScriptCore/bytecode/AdaptiveInferredPropertyValueWatchpointBase.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "AdaptiveInferredPropertyValueWatchpointBase.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/bytecode/ComplexGetStatus.cpp b/Source/JavaScriptCore/bytecode/ComplexGetStatus.cpp
+index edcb4d00..8ed05177 100644
+--- a/Source/JavaScriptCore/bytecode/ComplexGetStatus.cpp
++++ b/Source/JavaScriptCore/bytecode/ComplexGetStatus.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "ComplexGetStatus.h"
+ 
+ namespace JSC {
+diff --git a/Source/JavaScriptCore/bytecode/GetByStatus.cpp b/Source/JavaScriptCore/bytecode/GetByStatus.cpp
+index e4f851cb..6de7e4a3 100644
+--- a/Source/JavaScriptCore/bytecode/GetByStatus.cpp
++++ b/Source/JavaScriptCore/bytecode/GetByStatus.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "GetByStatus.h"
+ 
+ #include "BytecodeStructs.h"
+diff --git a/Source/JavaScriptCore/bytecode/InByStatus.cpp b/Source/JavaScriptCore/bytecode/InByStatus.cpp
+index ede88ecd..d076755c 100644
+--- a/Source/JavaScriptCore/bytecode/InByStatus.cpp
++++ b/Source/JavaScriptCore/bytecode/InByStatus.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "InByStatus.h"
+ 
+ #include "CacheableIdentifierInlines.h"
+diff --git a/Source/JavaScriptCore/bytecode/LLIntPrototypeLoadAdaptiveStructureWatchpoint.cpp b/Source/JavaScriptCore/bytecode/LLIntPrototypeLoadAdaptiveStructureWatchpoint.cpp
+index 237d9479..1e69ef9f 100644
+--- a/Source/JavaScriptCore/bytecode/LLIntPrototypeLoadAdaptiveStructureWatchpoint.cpp
++++ b/Source/JavaScriptCore/bytecode/LLIntPrototypeLoadAdaptiveStructureWatchpoint.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "LLIntPrototypeLoadAdaptiveStructureWatchpoint.h"
+ 
+ #include "CodeBlockInlines.h"
+diff --git a/Source/JavaScriptCore/bytecode/PropertyCondition.cpp b/Source/JavaScriptCore/bytecode/PropertyCondition.cpp
+index 0f12bc93..74f9391d 100644
+--- a/Source/JavaScriptCore/bytecode/PropertyCondition.cpp
++++ b/Source/JavaScriptCore/bytecode/PropertyCondition.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "PropertyCondition.h"
+ 
+ #include "GetterSetter.h"
+diff --git a/Source/JavaScriptCore/bytecode/PropertyInlineCacheClearingWatchpoint.cpp b/Source/JavaScriptCore/bytecode/PropertyInlineCacheClearingWatchpoint.cpp
+index f983910d..26e21439 100644
+--- a/Source/JavaScriptCore/bytecode/PropertyInlineCacheClearingWatchpoint.cpp
++++ b/Source/JavaScriptCore/bytecode/PropertyInlineCacheClearingWatchpoint.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "PropertyInlineCacheClearingWatchpoint.h"
+ 
+ #if ENABLE(JIT)
+diff --git a/Source/JavaScriptCore/bytecode/Repatch.cpp b/Source/JavaScriptCore/bytecode/Repatch.cpp
+index 081e1f33..8aef4ff2 100644
+--- a/Source/JavaScriptCore/bytecode/Repatch.cpp
++++ b/Source/JavaScriptCore/bytecode/Repatch.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "Repatch.h"
+ 
+ #include "BinarySwitch.h"
+diff --git a/Source/JavaScriptCore/debugger/DebuggerScope.cpp b/Source/JavaScriptCore/debugger/DebuggerScope.cpp
+index 5f7fd33d..d9e16dbe 100644
+--- a/Source/JavaScriptCore/debugger/DebuggerScope.cpp
++++ b/Source/JavaScriptCore/debugger/DebuggerScope.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "DebuggerScope.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/inspector/JSInjectedScriptHost.cpp b/Source/JavaScriptCore/inspector/JSInjectedScriptHost.cpp
+index ba1287ef..91a6ff1d 100644
+--- a/Source/JavaScriptCore/inspector/JSInjectedScriptHost.cpp
++++ b/Source/JavaScriptCore/inspector/JSInjectedScriptHost.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSInjectedScriptHost.h"
+ 
+ #include "ArrayPrototype.h"
+diff --git a/Source/JavaScriptCore/inspector/JSInjectedScriptHostPrototype.cpp b/Source/JavaScriptCore/inspector/JSInjectedScriptHostPrototype.cpp
+index bf4f64d0..9d285cac 100644
+--- a/Source/JavaScriptCore/inspector/JSInjectedScriptHostPrototype.cpp
++++ b/Source/JavaScriptCore/inspector/JSInjectedScriptHostPrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSInjectedScriptHostPrototype.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/inspector/JSJavaScriptCallFrame.cpp b/Source/JavaScriptCore/inspector/JSJavaScriptCallFrame.cpp
+index 2145caca..a23b1e76 100644
+--- a/Source/JavaScriptCore/inspector/JSJavaScriptCallFrame.cpp
++++ b/Source/JavaScriptCore/inspector/JSJavaScriptCallFrame.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSJavaScriptCallFrame.h"
+ 
+ #include "DebuggerScope.h"
+diff --git a/Source/JavaScriptCore/inspector/JSJavaScriptCallFramePrototype.cpp b/Source/JavaScriptCore/inspector/JSJavaScriptCallFramePrototype.cpp
+index 9c0430e0..e8c2a61a 100644
+--- a/Source/JavaScriptCore/inspector/JSJavaScriptCallFramePrototype.cpp
++++ b/Source/JavaScriptCore/inspector/JSJavaScriptCallFramePrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSJavaScriptCallFramePrototype.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/jsc.cpp b/Source/JavaScriptCore/jsc.cpp
+index f800aa45..199c4aeb 100644
+--- a/Source/JavaScriptCore/jsc.cpp
++++ b/Source/JavaScriptCore/jsc.cpp
+@@ -21,6 +21,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ 
+ #include "APICast.h"
+ #include "ArrayBuffer.h"
+diff --git a/Source/JavaScriptCore/runtime/AsyncDisposableStackConstructor.cpp b/Source/JavaScriptCore/runtime/AsyncDisposableStackConstructor.cpp
+index 5de99b46..9d6d480e 100644
+--- a/Source/JavaScriptCore/runtime/AsyncDisposableStackConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/AsyncDisposableStackConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "AsyncDisposableStackConstructor.h"
+ 
+ #include "AbstractSlotVisitor.h"
+diff --git a/Source/JavaScriptCore/runtime/AsyncGeneratorFunctionConstructor.cpp b/Source/JavaScriptCore/runtime/AsyncGeneratorFunctionConstructor.cpp
+index d8f30f36..878123f3 100644
+--- a/Source/JavaScriptCore/runtime/AsyncGeneratorFunctionConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/AsyncGeneratorFunctionConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "AsyncGeneratorFunctionConstructor.h"
+ 
+ #include "AsyncGeneratorFunctionPrototype.h"
+diff --git a/Source/JavaScriptCore/runtime/AtomicsObject.cpp b/Source/JavaScriptCore/runtime/AtomicsObject.cpp
+index 9f8833c1..f9affcdc 100644
+--- a/Source/JavaScriptCore/runtime/AtomicsObject.cpp
++++ b/Source/JavaScriptCore/runtime/AtomicsObject.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "AtomicsObject.h"
+ 
+ #include "FrameTracers.h"
+diff --git a/Source/JavaScriptCore/runtime/BrandedStructure.cpp b/Source/JavaScriptCore/runtime/BrandedStructure.cpp
+index 7aefcba9..c28c507b 100644
+--- a/Source/JavaScriptCore/runtime/BrandedStructure.cpp
++++ b/Source/JavaScriptCore/runtime/BrandedStructure.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "BrandedStructure.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/CachedSpecialPropertyAdaptiveStructureWatchpoint.cpp b/Source/JavaScriptCore/runtime/CachedSpecialPropertyAdaptiveStructureWatchpoint.cpp
+index 222ef69c..1c848cbf 100644
+--- a/Source/JavaScriptCore/runtime/CachedSpecialPropertyAdaptiveStructureWatchpoint.cpp
++++ b/Source/JavaScriptCore/runtime/CachedSpecialPropertyAdaptiveStructureWatchpoint.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "CachedSpecialPropertyAdaptiveStructureWatchpoint.h"
+ 
+ #include "JSCellInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/ClonedArguments.cpp b/Source/JavaScriptCore/runtime/ClonedArguments.cpp
+index aea239e0..b68d92d9 100644
+--- a/Source/JavaScriptCore/runtime/ClonedArguments.cpp
++++ b/Source/JavaScriptCore/runtime/ClonedArguments.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "ClonedArguments.h"
+ 
+ #include "InlineCallFrame.h"
+diff --git a/Source/JavaScriptCore/runtime/DirectArguments.cpp b/Source/JavaScriptCore/runtime/DirectArguments.cpp
+index 4865982d..fc1d435a 100644
+--- a/Source/JavaScriptCore/runtime/DirectArguments.cpp
++++ b/Source/JavaScriptCore/runtime/DirectArguments.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "DirectArguments.h"
+ 
+ #include "CodeBlock.h"
+diff --git a/Source/JavaScriptCore/runtime/DisposableStackConstructor.cpp b/Source/JavaScriptCore/runtime/DisposableStackConstructor.cpp
+index 6b2af807..b892d6f8 100644
+--- a/Source/JavaScriptCore/runtime/DisposableStackConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/DisposableStackConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "DisposableStackConstructor.h"
+ 
+ #include "AbstractSlotVisitor.h"
+diff --git a/Source/JavaScriptCore/runtime/FunctionRareData.cpp b/Source/JavaScriptCore/runtime/FunctionRareData.cpp
+index 686f766a..1da35694 100644
+--- a/Source/JavaScriptCore/runtime/FunctionRareData.cpp
++++ b/Source/JavaScriptCore/runtime/FunctionRareData.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "FunctionRareData.h"
+ 
+ #include "BuiltinNames.h"
+diff --git a/Source/JavaScriptCore/runtime/InternalFunction.cpp b/Source/JavaScriptCore/runtime/InternalFunction.cpp
+index bdef60d9..fc1715a0 100644
+--- a/Source/JavaScriptCore/runtime/InternalFunction.cpp
++++ b/Source/JavaScriptCore/runtime/InternalFunction.cpp
+@@ -21,6 +21,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "InternalFunction.h"
+ 
+ #include "JSBoundFunction.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlCollator.cpp b/Source/JavaScriptCore/runtime/IntlCollator.cpp
+index 6d745aa0..1a40f4dd 100644
+--- a/Source/JavaScriptCore/runtime/IntlCollator.cpp
++++ b/Source/JavaScriptCore/runtime/IntlCollator.cpp
+@@ -26,6 +26,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlCollator.h"
+ 
+ #include "IntlObjectInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlCollatorConstructor.cpp b/Source/JavaScriptCore/runtime/IntlCollatorConstructor.cpp
+index 759d4cea..172f747a 100644
+--- a/Source/JavaScriptCore/runtime/IntlCollatorConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/IntlCollatorConstructor.cpp
+@@ -26,6 +26,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlCollatorConstructor.h"
+ 
+ #include "IntlCollator.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlCollatorPrototype.cpp b/Source/JavaScriptCore/runtime/IntlCollatorPrototype.cpp
+index 0e286292..6612fef4 100644
+--- a/Source/JavaScriptCore/runtime/IntlCollatorPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/IntlCollatorPrototype.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlCollatorPrototype.h"
+ 
+ #include "IntlCollator.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlDateTimeFormat.cpp b/Source/JavaScriptCore/runtime/IntlDateTimeFormat.cpp
+index 5b60521b..aafbaf96 100644
+--- a/Source/JavaScriptCore/runtime/IntlDateTimeFormat.cpp
++++ b/Source/JavaScriptCore/runtime/IntlDateTimeFormat.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlDateTimeFormat.h"
+ 
+ #include "ISO8601.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlDateTimeFormatConstructor.cpp b/Source/JavaScriptCore/runtime/IntlDateTimeFormatConstructor.cpp
+index 695c9390..766be10d 100644
+--- a/Source/JavaScriptCore/runtime/IntlDateTimeFormatConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/IntlDateTimeFormatConstructor.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlDateTimeFormatConstructor.h"
+ 
+ #include "IntlDateTimeFormat.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlDateTimeFormatPrototype.cpp b/Source/JavaScriptCore/runtime/IntlDateTimeFormatPrototype.cpp
+index 0c847f82..7105bd62 100644
+--- a/Source/JavaScriptCore/runtime/IntlDateTimeFormatPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/IntlDateTimeFormatPrototype.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlDateTimeFormatPrototype.h"
+ 
+ #include "BuiltinNames.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlDisplayNames.cpp b/Source/JavaScriptCore/runtime/IntlDisplayNames.cpp
+index ce3def9f..18e28090 100644
+--- a/Source/JavaScriptCore/runtime/IntlDisplayNames.cpp
++++ b/Source/JavaScriptCore/runtime/IntlDisplayNames.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlDisplayNames.h"
+ 
+ #include "IntlCache.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlDisplayNamesConstructor.cpp b/Source/JavaScriptCore/runtime/IntlDisplayNamesConstructor.cpp
+index c3127d3f..6d3e296a 100644
+--- a/Source/JavaScriptCore/runtime/IntlDisplayNamesConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/IntlDisplayNamesConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlDisplayNamesConstructor.h"
+ 
+ #include "IntlDisplayNames.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlDisplayNamesPrototype.cpp b/Source/JavaScriptCore/runtime/IntlDisplayNamesPrototype.cpp
+index 3192bf0c..18f52576 100644
+--- a/Source/JavaScriptCore/runtime/IntlDisplayNamesPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/IntlDisplayNamesPrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlDisplayNamesPrototype.h"
+ 
+ #include "IntlDisplayNames.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlDurationFormat.cpp b/Source/JavaScriptCore/runtime/IntlDurationFormat.cpp
+index 26873eec..36fb582d 100644
+--- a/Source/JavaScriptCore/runtime/IntlDurationFormat.cpp
++++ b/Source/JavaScriptCore/runtime/IntlDurationFormat.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlDurationFormat.h"
+ 
+ #include "IntlNumberFormatInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlDurationFormatConstructor.cpp b/Source/JavaScriptCore/runtime/IntlDurationFormatConstructor.cpp
+index c06885ed..5d9ad50d 100644
+--- a/Source/JavaScriptCore/runtime/IntlDurationFormatConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/IntlDurationFormatConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlDurationFormatConstructor.h"
+ 
+ #include "IntlDurationFormat.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlDurationFormatPrototype.cpp b/Source/JavaScriptCore/runtime/IntlDurationFormatPrototype.cpp
+index ad6d86f9..25dd8a70 100644
+--- a/Source/JavaScriptCore/runtime/IntlDurationFormatPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/IntlDurationFormatPrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlDurationFormatPrototype.h"
+ 
+ #include "IntlDurationFormat.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlListFormat.cpp b/Source/JavaScriptCore/runtime/IntlListFormat.cpp
+index 1b099d36..c71326f0 100644
+--- a/Source/JavaScriptCore/runtime/IntlListFormat.cpp
++++ b/Source/JavaScriptCore/runtime/IntlListFormat.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlListFormat.h"
+ 
+ #include "IntlObjectInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlListFormatConstructor.cpp b/Source/JavaScriptCore/runtime/IntlListFormatConstructor.cpp
+index 0f60b9eb..21954b6d 100644
+--- a/Source/JavaScriptCore/runtime/IntlListFormatConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/IntlListFormatConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlListFormatConstructor.h"
+ 
+ #include "IntlListFormat.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlListFormatPrototype.cpp b/Source/JavaScriptCore/runtime/IntlListFormatPrototype.cpp
+index 6bd7f38a..dd5524e7 100644
+--- a/Source/JavaScriptCore/runtime/IntlListFormatPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/IntlListFormatPrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlListFormatPrototype.h"
+ 
+ #include "IntlListFormat.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlLocale.cpp b/Source/JavaScriptCore/runtime/IntlLocale.cpp
+index 27cf28bd..07b640ca 100644
+--- a/Source/JavaScriptCore/runtime/IntlLocale.cpp
++++ b/Source/JavaScriptCore/runtime/IntlLocale.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlLocale.h"
+ 
+ #include "IntlDateTimeFormat.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlLocaleConstructor.cpp b/Source/JavaScriptCore/runtime/IntlLocaleConstructor.cpp
+index 858c0cd6..e4326b8f 100644
+--- a/Source/JavaScriptCore/runtime/IntlLocaleConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/IntlLocaleConstructor.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlLocaleConstructor.h"
+ 
+ #include "IntlLocale.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlLocalePrototype.cpp b/Source/JavaScriptCore/runtime/IntlLocalePrototype.cpp
+index 3ae48e09..f8ab0011 100644
+--- a/Source/JavaScriptCore/runtime/IntlLocalePrototype.cpp
++++ b/Source/JavaScriptCore/runtime/IntlLocalePrototype.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlLocalePrototype.h"
+ 
+ #include "IntlLocale.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlNumberFormat.cpp b/Source/JavaScriptCore/runtime/IntlNumberFormat.cpp
+index 06cffdf7..6b5bb019 100644
+--- a/Source/JavaScriptCore/runtime/IntlNumberFormat.cpp
++++ b/Source/JavaScriptCore/runtime/IntlNumberFormat.cpp
+@@ -27,6 +27,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlNumberFormat.h"
+ 
+ #include "Error.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlNumberFormatConstructor.cpp b/Source/JavaScriptCore/runtime/IntlNumberFormatConstructor.cpp
+index 914a54af..ca760114 100644
+--- a/Source/JavaScriptCore/runtime/IntlNumberFormatConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/IntlNumberFormatConstructor.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlNumberFormatConstructor.h"
+ 
+ #include "IntlNumberFormat.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlNumberFormatPrototype.cpp b/Source/JavaScriptCore/runtime/IntlNumberFormatPrototype.cpp
+index 34c5366f..da7adf3a 100644
+--- a/Source/JavaScriptCore/runtime/IntlNumberFormatPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/IntlNumberFormatPrototype.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlNumberFormatPrototype.h"
+ 
+ #include "BuiltinNames.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlObject.cpp b/Source/JavaScriptCore/runtime/IntlObject.cpp
+index 7267db91..ec1cedc0 100644
+--- a/Source/JavaScriptCore/runtime/IntlObject.cpp
++++ b/Source/JavaScriptCore/runtime/IntlObject.cpp
+@@ -27,6 +27,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlObject.h"
+ 
+ #include "Error.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlPluralRules.cpp b/Source/JavaScriptCore/runtime/IntlPluralRules.cpp
+index ec533a1f..73085db7 100644
+--- a/Source/JavaScriptCore/runtime/IntlPluralRules.cpp
++++ b/Source/JavaScriptCore/runtime/IntlPluralRules.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlPluralRules.h"
+ 
+ #include "IntlNumberFormatInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlPluralRulesConstructor.cpp b/Source/JavaScriptCore/runtime/IntlPluralRulesConstructor.cpp
+index 82476960..78e25ef0 100644
+--- a/Source/JavaScriptCore/runtime/IntlPluralRulesConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/IntlPluralRulesConstructor.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlPluralRulesConstructor.h"
+ 
+ #include "IntlObject.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlPluralRulesPrototype.cpp b/Source/JavaScriptCore/runtime/IntlPluralRulesPrototype.cpp
+index 172f22cd..df45feb8 100644
+--- a/Source/JavaScriptCore/runtime/IntlPluralRulesPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/IntlPluralRulesPrototype.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlPluralRulesPrototype.h"
+ 
+ #include "IntlPluralRules.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlRelativeTimeFormat.cpp b/Source/JavaScriptCore/runtime/IntlRelativeTimeFormat.cpp
+index 0e34ba07..f4c22f5e 100644
+--- a/Source/JavaScriptCore/runtime/IntlRelativeTimeFormat.cpp
++++ b/Source/JavaScriptCore/runtime/IntlRelativeTimeFormat.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlRelativeTimeFormat.h"
+ 
+ #include "IntlNumberFormatInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlRelativeTimeFormatConstructor.cpp b/Source/JavaScriptCore/runtime/IntlRelativeTimeFormatConstructor.cpp
+index dbdf8066..8c7c3d6e 100644
+--- a/Source/JavaScriptCore/runtime/IntlRelativeTimeFormatConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/IntlRelativeTimeFormatConstructor.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlRelativeTimeFormatConstructor.h"
+ 
+ #include "IntlObject.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlRelativeTimeFormatPrototype.cpp b/Source/JavaScriptCore/runtime/IntlRelativeTimeFormatPrototype.cpp
+index eb505efe..598cc95d 100644
+--- a/Source/JavaScriptCore/runtime/IntlRelativeTimeFormatPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/IntlRelativeTimeFormatPrototype.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlRelativeTimeFormatPrototype.h"
+ 
+ #include "IntlRelativeTimeFormat.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlSegmentIterator.cpp b/Source/JavaScriptCore/runtime/IntlSegmentIterator.cpp
+index c89b2785..a7e39015 100644
+--- a/Source/JavaScriptCore/runtime/IntlSegmentIterator.cpp
++++ b/Source/JavaScriptCore/runtime/IntlSegmentIterator.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlSegmentIterator.h"
+ 
+ #include "IntlSegmentDataObject.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlSegmentIteratorPrototype.cpp b/Source/JavaScriptCore/runtime/IntlSegmentIteratorPrototype.cpp
+index 23c9d63e..b888e174 100644
+--- a/Source/JavaScriptCore/runtime/IntlSegmentIteratorPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/IntlSegmentIteratorPrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlSegmentIteratorPrototype.h"
+ 
+ #include "IntlSegmentIterator.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlSegmenter.cpp b/Source/JavaScriptCore/runtime/IntlSegmenter.cpp
+index 1d366cb6..5249a2cd 100644
+--- a/Source/JavaScriptCore/runtime/IntlSegmenter.cpp
++++ b/Source/JavaScriptCore/runtime/IntlSegmenter.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlSegmenter.h"
+ 
+ #include "IntlObjectInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlSegmenterConstructor.cpp b/Source/JavaScriptCore/runtime/IntlSegmenterConstructor.cpp
+index 59c1c4b1..169c811d 100644
+--- a/Source/JavaScriptCore/runtime/IntlSegmenterConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/IntlSegmenterConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlSegmenterConstructor.h"
+ 
+ #include "IntlSegmenter.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlSegmenterPrototype.cpp b/Source/JavaScriptCore/runtime/IntlSegmenterPrototype.cpp
+index 6a966771..f4ca92db 100644
+--- a/Source/JavaScriptCore/runtime/IntlSegmenterPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/IntlSegmenterPrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlSegmenterPrototype.h"
+ 
+ #include "IntlSegmenter.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlSegments.cpp b/Source/JavaScriptCore/runtime/IntlSegments.cpp
+index ec049f6c..0b675aa5 100644
+--- a/Source/JavaScriptCore/runtime/IntlSegments.cpp
++++ b/Source/JavaScriptCore/runtime/IntlSegments.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlSegments.h"
+ 
+ #include "IntlObjectInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/IntlSegmentsPrototype.cpp b/Source/JavaScriptCore/runtime/IntlSegmentsPrototype.cpp
+index cb54c3e3..437ed813 100644
+--- a/Source/JavaScriptCore/runtime/IntlSegmentsPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/IntlSegmentsPrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "IntlSegmentsPrototype.h"
+ 
+ #include "IntlSegments.h"
+diff --git a/Source/JavaScriptCore/runtime/JSArrayBuffer.cpp b/Source/JavaScriptCore/runtime/JSArrayBuffer.cpp
+index 03413453..5b6d27ac 100644
+--- a/Source/JavaScriptCore/runtime/JSArrayBuffer.cpp
++++ b/Source/JavaScriptCore/runtime/JSArrayBuffer.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSArrayBuffer.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/JSArrayBufferConstructor.cpp b/Source/JavaScriptCore/runtime/JSArrayBufferConstructor.cpp
+index f1352fce..b4451778 100644
+--- a/Source/JavaScriptCore/runtime/JSArrayBufferConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/JSArrayBufferConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSArrayBufferConstructor.h"
+ 
+ #include "BuiltinNames.h"
+diff --git a/Source/JavaScriptCore/runtime/JSArrayBufferPrototype.cpp b/Source/JavaScriptCore/runtime/JSArrayBufferPrototype.cpp
+index 9fa1f22b..ca016f21 100644
+--- a/Source/JavaScriptCore/runtime/JSArrayBufferPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/JSArrayBufferPrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSArrayBufferPrototype.h"
+ 
+ #include "ArrayPrototypeInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/JSArrayIterator.cpp b/Source/JavaScriptCore/runtime/JSArrayIterator.cpp
+index aa5017b5..cdb9fcc9 100644
+--- a/Source/JavaScriptCore/runtime/JSArrayIterator.cpp
++++ b/Source/JavaScriptCore/runtime/JSArrayIterator.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSArrayIterator.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/JSAsyncFunctionGenerator.cpp b/Source/JavaScriptCore/runtime/JSAsyncFunctionGenerator.cpp
+index 961b836f..ffb961d2 100644
+--- a/Source/JavaScriptCore/runtime/JSAsyncFunctionGenerator.cpp
++++ b/Source/JavaScriptCore/runtime/JSAsyncFunctionGenerator.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSAsyncFunctionGenerator.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/JSAsyncGenerator.cpp b/Source/JavaScriptCore/runtime/JSAsyncGenerator.cpp
+index 9c9ab58b..8872a03e 100644
+--- a/Source/JavaScriptCore/runtime/JSAsyncGenerator.cpp
++++ b/Source/JavaScriptCore/runtime/JSAsyncGenerator.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSAsyncGenerator.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/JSBigInt.cpp b/Source/JavaScriptCore/runtime/JSBigInt.cpp
+index 3b95429b..df26a1ec 100644
+--- a/Source/JavaScriptCore/runtime/JSBigInt.cpp
++++ b/Source/JavaScriptCore/runtime/JSBigInt.cpp
+@@ -45,6 +45,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSBigInt.h"
+ #include "JSCJSValueBigInt.h"
+ 
+diff --git a/Source/JavaScriptCore/runtime/JSBoundFunction.cpp b/Source/JavaScriptCore/runtime/JSBoundFunction.cpp
+index 276c23bb..749aff2d 100644
+--- a/Source/JavaScriptCore/runtime/JSBoundFunction.cpp
++++ b/Source/JavaScriptCore/runtime/JSBoundFunction.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSBoundFunction.h"
+ 
+ #include "DeferTermination.h"
+diff --git a/Source/JavaScriptCore/runtime/JSDataView.cpp b/Source/JavaScriptCore/runtime/JSDataView.cpp
+index d2f426e8..aa762d2a 100644
+--- a/Source/JavaScriptCore/runtime/JSDataView.cpp
++++ b/Source/JavaScriptCore/runtime/JSDataView.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSDataView.h"
+ #include "JSGenericTypedArrayViewConstructor.h"
+ 
+diff --git a/Source/JavaScriptCore/runtime/JSDataViewPrototype.cpp b/Source/JavaScriptCore/runtime/JSDataViewPrototype.cpp
+index 12ea054d..0ffdb8d1 100644
+--- a/Source/JavaScriptCore/runtime/JSDataViewPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/JSDataViewPrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSDataViewPrototype.h"
+ 
+ #include "JSArrayBuffer.h"
+diff --git a/Source/JavaScriptCore/runtime/JSFinalizationRegistry.cpp b/Source/JavaScriptCore/runtime/JSFinalizationRegistry.cpp
+index df67c3f0..9df1adf2 100644
+--- a/Source/JavaScriptCore/runtime/JSFinalizationRegistry.cpp
++++ b/Source/JavaScriptCore/runtime/JSFinalizationRegistry.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSFinalizationRegistry.h"
+ 
+ #include "AbstractSlotVisitor.h"
+diff --git a/Source/JavaScriptCore/runtime/JSFunction.cpp b/Source/JavaScriptCore/runtime/JSFunction.cpp
+index 748edf4d..ef651237 100644
+--- a/Source/JavaScriptCore/runtime/JSFunction.cpp
++++ b/Source/JavaScriptCore/runtime/JSFunction.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSFunction.h"
+ 
+ #include "AsyncGeneratorPrototype.h"
+diff --git a/Source/JavaScriptCore/runtime/JSFunctionWithFields.cpp b/Source/JavaScriptCore/runtime/JSFunctionWithFields.cpp
+index 6ea7597c..897fe49b 100644
+--- a/Source/JavaScriptCore/runtime/JSFunctionWithFields.cpp
++++ b/Source/JavaScriptCore/runtime/JSFunctionWithFields.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSFunctionWithFields.h"
+ 
+ #include "JSCellInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/JSGenerator.cpp b/Source/JavaScriptCore/runtime/JSGenerator.cpp
+index 66fe1688..1a186430 100644
+--- a/Source/JavaScriptCore/runtime/JSGenerator.cpp
++++ b/Source/JavaScriptCore/runtime/JSGenerator.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSGenerator.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/JSIterator.cpp b/Source/JavaScriptCore/runtime/JSIterator.cpp
+index a2bb42da..88faa918 100644
+--- a/Source/JavaScriptCore/runtime/JSIterator.cpp
++++ b/Source/JavaScriptCore/runtime/JSIterator.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSIterator.h"
+ 
+ #include "AbstractSlotVisitor.h"
+diff --git a/Source/JavaScriptCore/runtime/JSIteratorConstructor.cpp b/Source/JavaScriptCore/runtime/JSIteratorConstructor.cpp
+index 59b63130..0dac33b7 100644
+--- a/Source/JavaScriptCore/runtime/JSIteratorConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/JSIteratorConstructor.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSIteratorConstructor.h"
+ 
+ #include "AbstractSlotVisitor.h"
+diff --git a/Source/JavaScriptCore/runtime/JSIteratorHelper.cpp b/Source/JavaScriptCore/runtime/JSIteratorHelper.cpp
+index 41bbdcb6..eae2abef 100644
+--- a/Source/JavaScriptCore/runtime/JSIteratorHelper.cpp
++++ b/Source/JavaScriptCore/runtime/JSIteratorHelper.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSIteratorHelper.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/JSMicrotaskDispatcher.cpp b/Source/JavaScriptCore/runtime/JSMicrotaskDispatcher.cpp
+index 36611c6b..5d4d4406 100644
+--- a/Source/JavaScriptCore/runtime/JSMicrotaskDispatcher.cpp
++++ b/Source/JavaScriptCore/runtime/JSMicrotaskDispatcher.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSMicrotaskDispatcher.h"
+ 
+ #include "JSCJSValueInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/JSONObject.cpp b/Source/JavaScriptCore/runtime/JSONObject.cpp
+index 06e8b956..6d521eb3 100644
+--- a/Source/JavaScriptCore/runtime/JSONObject.cpp
++++ b/Source/JavaScriptCore/runtime/JSONObject.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSONObject.h"
+ 
+ #include "ArrayConstructor.h"
+diff --git a/Source/JavaScriptCore/runtime/JSObject.cpp b/Source/JavaScriptCore/runtime/JSObject.cpp
+index b1280562..4b6fa952 100644
+--- a/Source/JavaScriptCore/runtime/JSObject.cpp
++++ b/Source/JavaScriptCore/runtime/JSObject.cpp
+@@ -22,6 +22,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSObject.h"
+ 
+ #include "AllocationFailureMode.h"
+diff --git a/Source/JavaScriptCore/runtime/JSPromise.cpp b/Source/JavaScriptCore/runtime/JSPromise.cpp
+index b7f8a3eb..fd194482 100644
+--- a/Source/JavaScriptCore/runtime/JSPromise.cpp
++++ b/Source/JavaScriptCore/runtime/JSPromise.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSPromise.h"
+ 
+ #include "BuiltinNames.h"
+diff --git a/Source/JavaScriptCore/runtime/JSPromiseCombinatorsGlobalContext.cpp b/Source/JavaScriptCore/runtime/JSPromiseCombinatorsGlobalContext.cpp
+index 9bd8a4e1..6dc1fb16 100644
+--- a/Source/JavaScriptCore/runtime/JSPromiseCombinatorsGlobalContext.cpp
++++ b/Source/JavaScriptCore/runtime/JSPromiseCombinatorsGlobalContext.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSPromiseCombinatorsGlobalContext.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/JSPromiseConstructor.cpp b/Source/JavaScriptCore/runtime/JSPromiseConstructor.cpp
+index 0b872524..b4ad91bb 100644
+--- a/Source/JavaScriptCore/runtime/JSPromiseConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/JSPromiseConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSPromiseConstructor.h"
+ 
+ #include "AggregateError.h"
+diff --git a/Source/JavaScriptCore/runtime/JSPromisePrototype.cpp b/Source/JavaScriptCore/runtime/JSPromisePrototype.cpp
+index 158fb0f6..36a79a42 100644
+--- a/Source/JavaScriptCore/runtime/JSPromisePrototype.cpp
++++ b/Source/JavaScriptCore/runtime/JSPromisePrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSPromisePrototype.h"
+ 
+ #include "BuiltinNames.h"
+diff --git a/Source/JavaScriptCore/runtime/JSPromiseReaction.cpp b/Source/JavaScriptCore/runtime/JSPromiseReaction.cpp
+index c0807640..f01f77a5 100644
+--- a/Source/JavaScriptCore/runtime/JSPromiseReaction.cpp
++++ b/Source/JavaScriptCore/runtime/JSPromiseReaction.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSPromiseReaction.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/JSRawJSONObject.cpp b/Source/JavaScriptCore/runtime/JSRawJSONObject.cpp
+index 5e58d86f..d867ced6 100644
+--- a/Source/JavaScriptCore/runtime/JSRawJSONObject.cpp
++++ b/Source/JavaScriptCore/runtime/JSRawJSONObject.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSRawJSONObject.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/JSString.cpp b/Source/JavaScriptCore/runtime/JSString.cpp
+index 244b58c5..893a99d2 100644
+--- a/Source/JavaScriptCore/runtime/JSString.cpp
++++ b/Source/JavaScriptCore/runtime/JSString.cpp
+@@ -21,6 +21,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSString.h"
+ 
+ #include "JSGlobalObjectFunctions.h"
+@@ -460,4 +461,4 @@ void JSRopeString::iterRopeSlowCase(jsstring_iterator* iter) const
+ 
+ } // namespace JSC
+ 
+-WTF_ALLOW_UNSAFE_BUFFER_USAGE_END
+\ No newline at end of file
++WTF_ALLOW_UNSAFE_BUFFER_USAGE_END
+diff --git a/Source/JavaScriptCore/runtime/JSTypedArrayViewConstructor.cpp b/Source/JavaScriptCore/runtime/JSTypedArrayViewConstructor.cpp
+index 52e1a2ec..78e71b54 100644
+--- a/Source/JavaScriptCore/runtime/JSTypedArrayViewConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/JSTypedArrayViewConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSTypedArrayViewConstructor.h"
+ 
+ #include "GetterSetter.h"
+diff --git a/Source/JavaScriptCore/runtime/JSTypedArrayViewPrototype.cpp b/Source/JavaScriptCore/runtime/JSTypedArrayViewPrototype.cpp
+index 25dcc025..d6a4616b 100644
+--- a/Source/JavaScriptCore/runtime/JSTypedArrayViewPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/JSTypedArrayViewPrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSTypedArrayViewPrototype.h"
+ 
+ #include "BuiltinNames.h"
+diff --git a/Source/JavaScriptCore/runtime/JSWithScope.cpp b/Source/JavaScriptCore/runtime/JSWithScope.cpp
+index 4c5cd362..9e46c0f1 100644
+--- a/Source/JavaScriptCore/runtime/JSWithScope.cpp
++++ b/Source/JavaScriptCore/runtime/JSWithScope.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSWithScope.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/NativeExecutable.cpp b/Source/JavaScriptCore/runtime/NativeExecutable.cpp
+index 18c154a2..595a1088 100644
+--- a/Source/JavaScriptCore/runtime/NativeExecutable.cpp
++++ b/Source/JavaScriptCore/runtime/NativeExecutable.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "NativeExecutable.h"
+ 
+ #include "Debugger.h"
+diff --git a/Source/JavaScriptCore/runtime/NumberObject.cpp b/Source/JavaScriptCore/runtime/NumberObject.cpp
+index 33927a05..dfb98fed 100644
+--- a/Source/JavaScriptCore/runtime/NumberObject.cpp
++++ b/Source/JavaScriptCore/runtime/NumberObject.cpp
+@@ -20,6 +20,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "NumberObject.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/ObjectConstructor.cpp b/Source/JavaScriptCore/runtime/ObjectConstructor.cpp
+index 676609f4..2df87c87 100644
+--- a/Source/JavaScriptCore/runtime/ObjectConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/ObjectConstructor.cpp
+@@ -19,6 +19,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "ObjectConstructor.h"
+ 
+ #include "BuiltinNames.h"
+diff --git a/Source/JavaScriptCore/runtime/PinballCompletion.cpp b/Source/JavaScriptCore/runtime/PinballCompletion.cpp
+index 33009062..37983963 100644
+--- a/Source/JavaScriptCore/runtime/PinballCompletion.cpp
++++ b/Source/JavaScriptCore/runtime/PinballCompletion.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "PinballCompletion.h"
+ 
+ #if ENABLE(WEBASSEMBLY)
+diff --git a/Source/JavaScriptCore/runtime/ScopedArguments.cpp b/Source/JavaScriptCore/runtime/ScopedArguments.cpp
+index 0efef766..101dfb07 100644
+--- a/Source/JavaScriptCore/runtime/ScopedArguments.cpp
++++ b/Source/JavaScriptCore/runtime/ScopedArguments.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "ScopedArguments.h"
+ 
+ #include "GenericArgumentsImplInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/ScopedArgumentsTable.cpp b/Source/JavaScriptCore/runtime/ScopedArgumentsTable.cpp
+index 24ff2eff..712f3f64 100644
+--- a/Source/JavaScriptCore/runtime/ScopedArgumentsTable.cpp
++++ b/Source/JavaScriptCore/runtime/ScopedArgumentsTable.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "ScopedArgumentsTable.h"
+ 
+ #include "JSCJSValueInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/SparseArrayValueMap.cpp b/Source/JavaScriptCore/runtime/SparseArrayValueMap.cpp
+index fa467156..92cd6ca5 100644
+--- a/Source/JavaScriptCore/runtime/SparseArrayValueMap.cpp
++++ b/Source/JavaScriptCore/runtime/SparseArrayValueMap.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "SparseArrayValueMap.h"
+ 
+ #include "GetterSetter.h"
+diff --git a/Source/JavaScriptCore/runtime/Structure.cpp b/Source/JavaScriptCore/runtime/Structure.cpp
+index 9fcfeb37..219b41d3 100644
+--- a/Source/JavaScriptCore/runtime/Structure.cpp
++++ b/Source/JavaScriptCore/runtime/Structure.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "Structure.h"
+ 
+ #include "BrandedStructure.h"
+diff --git a/Source/JavaScriptCore/runtime/StructureCache.cpp b/Source/JavaScriptCore/runtime/StructureCache.cpp
+index 76af40fc..eb6f96ad 100644
+--- a/Source/JavaScriptCore/runtime/StructureCache.cpp
++++ b/Source/JavaScriptCore/runtime/StructureCache.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "StructureCache.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/SyntheticModuleRecord.cpp b/Source/JavaScriptCore/runtime/SyntheticModuleRecord.cpp
+index 89571133..b8868e59 100644
+--- a/Source/JavaScriptCore/runtime/SyntheticModuleRecord.cpp
++++ b/Source/JavaScriptCore/runtime/SyntheticModuleRecord.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "SyntheticModuleRecord.h"
+ 
+ #include "ArgList.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalDuration.cpp b/Source/JavaScriptCore/runtime/TemporalDuration.cpp
+index 7572851b..87354209 100644
+--- a/Source/JavaScriptCore/runtime/TemporalDuration.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalDuration.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalDuration.h"
+ 
+ #include "DateConstructor.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalDurationConstructor.cpp b/Source/JavaScriptCore/runtime/TemporalDurationConstructor.cpp
+index a65d5382..317ebe6a 100644
+--- a/Source/JavaScriptCore/runtime/TemporalDurationConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalDurationConstructor.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalDurationConstructor.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalDurationPrototype.cpp b/Source/JavaScriptCore/runtime/TemporalDurationPrototype.cpp
+index 87c25cdf..3490fdae 100644
+--- a/Source/JavaScriptCore/runtime/TemporalDurationPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalDurationPrototype.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalDurationPrototype.h"
+ 
+ #include "DurationArithmetic.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalInstant.cpp b/Source/JavaScriptCore/runtime/TemporalInstant.cpp
+index fd963be7..87d42757 100644
+--- a/Source/JavaScriptCore/runtime/TemporalInstant.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalInstant.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalInstant.h"
+ 
+ #include "AuxiliaryBarrierInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalInstantConstructor.cpp b/Source/JavaScriptCore/runtime/TemporalInstantConstructor.cpp
+index b5d6f9a4..902bfdcc 100644
+--- a/Source/JavaScriptCore/runtime/TemporalInstantConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalInstantConstructor.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalInstantConstructor.h"
+ 
+ #include "JSCInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalInstantPrototype.cpp b/Source/JavaScriptCore/runtime/TemporalInstantPrototype.cpp
+index 0fbc74d6..71f5d9c0 100644
+--- a/Source/JavaScriptCore/runtime/TemporalInstantPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalInstantPrototype.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalInstantPrototype.h"
+ 
+ #include "ISO8601.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalNow.cpp b/Source/JavaScriptCore/runtime/TemporalNow.cpp
+index 2951f122..485893ff 100644
+--- a/Source/JavaScriptCore/runtime/TemporalNow.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalNow.cpp
+@@ -19,6 +19,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalNow.h"
+ 
+ #include "ISO8601.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalObject.cpp b/Source/JavaScriptCore/runtime/TemporalObject.cpp
+index c5304d80..56903062 100644
+--- a/Source/JavaScriptCore/runtime/TemporalObject.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalObject.cpp
+@@ -20,6 +20,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalObject.h"
+ 
+ #include "FractionToDouble.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainDate.cpp b/Source/JavaScriptCore/runtime/TemporalPlainDate.cpp
+index 85a947d2..06bd61ff 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainDate.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainDate.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainDate.h"
+ 
+ #include "CalendarFields.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainDateConstructor.cpp b/Source/JavaScriptCore/runtime/TemporalPlainDateConstructor.cpp
+index 6d3bd111..25337c66 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainDateConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainDateConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainDateConstructor.h"
+ 
+ #include "IntlObjectInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainDatePrototype.cpp b/Source/JavaScriptCore/runtime/TemporalPlainDatePrototype.cpp
+index 6c74fd4e..6358efe5 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainDatePrototype.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainDatePrototype.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainDatePrototype.h"
+ 
+ #include "CalendarFields.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainDateTime.cpp b/Source/JavaScriptCore/runtime/TemporalPlainDateTime.cpp
+index 88ff5742..56346d5e 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainDateTime.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainDateTime.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainDateTime.h"
+ 
+ #include "CalendarICUBridge.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainDateTimeConstructor.cpp b/Source/JavaScriptCore/runtime/TemporalPlainDateTimeConstructor.cpp
+index 07f65d7e..8bddcc53 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainDateTimeConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainDateTimeConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainDateTimeConstructor.h"
+ 
+ #include "IntlObjectInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainDateTimePrototype.cpp b/Source/JavaScriptCore/runtime/TemporalPlainDateTimePrototype.cpp
+index cd1a3f25..935e172b 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainDateTimePrototype.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainDateTimePrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainDateTimePrototype.h"
+ 
+ #include "CalendarICUBridge.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainMonthDay.cpp b/Source/JavaScriptCore/runtime/TemporalPlainMonthDay.cpp
+index e3f6e261..18738744 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainMonthDay.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainMonthDay.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainMonthDay.h"
+ 
+ #include "CalendarFields.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainMonthDayConstructor.cpp b/Source/JavaScriptCore/runtime/TemporalPlainMonthDayConstructor.cpp
+index e5f7cbd3..0bcadf70 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainMonthDayConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainMonthDayConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainMonthDayConstructor.h"
+ 
+ #include "IntlObjectInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainMonthDayPrototype.cpp b/Source/JavaScriptCore/runtime/TemporalPlainMonthDayPrototype.cpp
+index 5ee0dcd6..090f5023 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainMonthDayPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainMonthDayPrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainMonthDayPrototype.h"
+ 
+ #include "CalendarFields.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainTime.cpp b/Source/JavaScriptCore/runtime/TemporalPlainTime.cpp
+index aa143273..ba832ae2 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainTime.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainTime.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainTime.h"
+ 
+ #include "DurationArithmetic.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainTimeConstructor.cpp b/Source/JavaScriptCore/runtime/TemporalPlainTimeConstructor.cpp
+index 06822875..7918a485 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainTimeConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainTimeConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainTimeConstructor.h"
+ 
+ #include "IntlObjectInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainTimePrototype.cpp b/Source/JavaScriptCore/runtime/TemporalPlainTimePrototype.cpp
+index 6bbd7e12..9316c8ae 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainTimePrototype.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainTimePrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainTimePrototype.h"
+ 
+ #include "IntlDateTimeFormat.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainYearMonth.cpp b/Source/JavaScriptCore/runtime/TemporalPlainYearMonth.cpp
+index 7314593c..ff69c61d 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainYearMonth.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainYearMonth.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainYearMonth.h"
+ 
+ #include "CalendarFields.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainYearMonthConstructor.cpp b/Source/JavaScriptCore/runtime/TemporalPlainYearMonthConstructor.cpp
+index 629bc767..25b27ffe 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainYearMonthConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainYearMonthConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainYearMonthConstructor.h"
+ 
+ #include "IntlObjectInlines.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalPlainYearMonthPrototype.cpp b/Source/JavaScriptCore/runtime/TemporalPlainYearMonthPrototype.cpp
+index a219d1a6..f2b34a62 100644
+--- a/Source/JavaScriptCore/runtime/TemporalPlainYearMonthPrototype.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalPlainYearMonthPrototype.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalPlainYearMonthPrototype.h"
+ 
+ #include "CalendarFields.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalZonedDateTime.cpp b/Source/JavaScriptCore/runtime/TemporalZonedDateTime.cpp
+index c1e40824..8698d7c1 100644
+--- a/Source/JavaScriptCore/runtime/TemporalZonedDateTime.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalZonedDateTime.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalZonedDateTime.h"
+ 
+ #include "CalendarFields.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalZonedDateTimeConstructor.cpp b/Source/JavaScriptCore/runtime/TemporalZonedDateTimeConstructor.cpp
+index b33b9e22..250dca92 100644
+--- a/Source/JavaScriptCore/runtime/TemporalZonedDateTimeConstructor.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalZonedDateTimeConstructor.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalZonedDateTimeConstructor.h"
+ 
+ #include "ISO8601.h"
+diff --git a/Source/JavaScriptCore/runtime/TemporalZonedDateTimePrototype.cpp b/Source/JavaScriptCore/runtime/TemporalZonedDateTimePrototype.cpp
+index c3840cfb..4a528272 100644
+--- a/Source/JavaScriptCore/runtime/TemporalZonedDateTimePrototype.cpp
++++ b/Source/JavaScriptCore/runtime/TemporalZonedDateTimePrototype.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "TemporalZonedDateTimePrototype.h"
+ 
+ #include "CalendarICUBridge.h"
+diff --git a/Source/JavaScriptCore/testRegExp.cpp b/Source/JavaScriptCore/testRegExp.cpp
+index 745250cb..bf09cfb7 100644
+--- a/Source/JavaScriptCore/testRegExp.cpp
++++ b/Source/JavaScriptCore/testRegExp.cpp
+@@ -19,6 +19,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "RegExp.h"
+ 
+ #include "InitializeThreading.h"
+diff --git a/Source/JavaScriptCore/tools/JSDollarVM.cpp b/Source/JavaScriptCore/tools/JSDollarVM.cpp
+index 31c3373c..3b44f196 100644
+--- a/Source/JavaScriptCore/tools/JSDollarVM.cpp
++++ b/Source/JavaScriptCore/tools/JSDollarVM.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include "StructureInlines.h"
+ #include "JSDollarVM.h"
+ 
+ #include "ArrayPrototype.h"
