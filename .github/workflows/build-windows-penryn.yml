@@ -147,6 +147,15 @@ jobs:
           git clone https://github.com/oven-sh/WebKit.git vendor/WebKit
           git -C vendor/WebKit checkout "$COMMIT"
 
+      - name: Apply WebKit-side patch (DOMJITEffect.h unconditionally assumes DFG_JIT — needed for the CLoop variant, harmless/no-op for the normal JIT build)
+        shell: bash
+        run: |
+          set -euo pipefail
+          PATCH="$(pwd)/patches/0004-domjit-effect-guard-dfg-kinds.patch"
+          cd vendor/WebKit
+          git apply --check "$PATCH"
+          git apply "$PATCH"
+
       - name: Build WebKit (JSC/WTF/bmalloc) only — fails fast if -march=penryn breaks the compile
         shell: pwsh
         env:
