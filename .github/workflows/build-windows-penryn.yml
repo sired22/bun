@@ -1,0 +1,149 @@
+name: build-bun-penryn-windows
+
+# Manually triggered: go to the Actions tab on your fork/repo on
+# GitHub.com -> "build-bun-penryn-windows" -> "Run workflow".
+#
+# Runs entirely on GitHub's windows-latest runner — a normal, modern
+# CPU, so the bootstrap problem in docs/ARCHITECTURE.md ("layer 0")
+# doesn't apply here, and Visual Studio Build Tools are already
+# preinstalled on that image. You never install or configure Visual
+# Studio yourself; this is the whole point of building it this way.
+#
+# UNTESTED end-to-end as written — built directly from Bun's own
+# building-windows docs and source, but I have not run this workflow
+# myself. Treat the first run as a debugging session, not a sure
+# thing. See docs/DECISIONS.md #9.
+#
+# Output: a bun.exe artifact, attached to the completed run, that you
+# download and copy to the E8400 for the real test (script
+# 05-test-on-target.ps1).
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_cloop_variant:
+        description: "Also build the JIT-disabled (CLoop) fallback variant"
+        type: boolean
+        default: false
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout this repo (must include patches/ from this package)
+        uses: actions/checkout@v4
+
+      - name: Bootstrap — install official Bun
+        shell: pwsh
+        run: |
+          irm bun.sh/install.ps1 | iex
+          echo "$HOME\.bun\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Sanity-check bootstrap Bun runs on this runner
+        shell: pwsh
+        run: bun --version
+
+      - name: Ensure LLVM (clang-cl, lld-link, llvm-lib, llvm-rc) is available
+        shell: pwsh
+        run: |
+          # windows-latest images generally ship LLVM already; this is a
+          # defensive reinstall/pin in case the exact tools aren't on PATH.
+          # Adjust the version if Bun's scripts/bootstrap.sh (llvm_version_exact)
+          # has moved on by the time you run this.
+          choco install llvm -y --no-progress
+          echo "C:\Program Files\LLVM\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Install nasm (needed for Windows x64 BoringSSL asm)
+        shell: pwsh
+        run: choco install nasm -y --no-progress
+
+      - name: Apply this project's patches
+        shell: bash
+        run: |
+          set -euo pipefail
+          git apply --check patches/0001-add-penryn-baseline-override.patch
+          git apply patches/0001-add-penryn-baseline-override.patch
+          git apply --check patches/0002-add-cloop-fallback-toggle.patch
+          git apply patches/0002-add-cloop-fallback-toggle.patch
+          git diff --stat
+
+      - name: Clone pinned WebKit fork commit (local WebKit build)
+        shell: bash
+        run: |
+          set -euo pipefail
+          COMMIT="$(grep -m1 'WEBKIT_VERSION =' scripts/build/deps/webkit.ts | sed -E 's/.*"([0-9a-f]+)".*/\1/')"
+          echo "Pinned WebKit commit: $COMMIT"
+          git clone https://github.com/oven-sh/WebKit.git vendor/WebKit
+          git -C vendor/WebKit checkout "$COMMIT"
+
+      - name: Build WebKit (JSC/WTF/bmalloc) only — fails fast if -march=penryn breaks the compile
+        shell: pwsh
+        env:
+          BUN_CPU_MARCH: "-march=penryn"
+        run: bun run build --profile=release-local --webkit=local --baseline=on --target=WebKit
+
+      - name: Build full bun.exe
+        shell: pwsh
+        env:
+          BUN_CPU_MARCH: "-march=penryn"
+        run: bun run build --profile=release-local --webkit=local --baseline=on
+
+      - name: Locate the built exe (path is a best guess — see docs/DECISIONS.md #9)
+        shell: pwsh
+        run: |
+          Get-ChildItem -Recurse -Filter "bun.exe" build | Select-Object FullName
+          Get-ChildItem -Recurse -Filter "bun-profile.exe" build | Select-Object FullName
+
+      - name: Upload bun.exe artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bun-penryn-windows-x64
+          path: |
+            build/release-local/bun.exe
+            build/release-local/bun-profile.exe
+          if-no-files-found: warn
+
+      - name: Locate and upload codegen output (reusable across every -march variant — see docs/ARCHITECTURE.md "Layer 0")
+        shell: pwsh
+        run: |
+          # Best-effort: cfg.codegenDir's exact resolved path wasn't
+          # independently confirmed end-to-end (see docs/DECISIONS.md
+          # #10) — this globs for it rather than hardcoding one path.
+          $dirs = Get-ChildItem -Recurse -Directory -Filter "codegen" build -ErrorAction SilentlyContinue
+          if ($dirs) {
+            Compress-Archive -Path $dirs[0].FullName -DestinationPath codegen-output.zip
+          } else {
+            Write-Host "No 'codegen' directory found under build/ — check the build log above for the actual output location and adjust this step."
+          }
+
+      - name: Upload codegen artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bun-codegen-output-windows-x64
+          path: codegen-output.zip
+          if-no-files-found: warn
+
+      # ---- Optional second build: JIT disabled (CLoop), see script 06 ----
+      - name: Build WebKit with CLoop (JIT disabled) — only if requested
+        if: ${{ inputs.build_cloop_variant }}
+        shell: pwsh
+        env:
+          BUN_CPU_MARCH: "-march=penryn"
+          BUN_JSC_CLOOP: "1"
+        run: |
+          # Rebuilding WebKit under a different config in the SAME checkout
+          # may not cleanly invalidate prior CMake cache — if this errors
+          # confusingly, the safe fix is re-running in a fresh checkout
+          # (delete build/ and vendor/WebKit's build dir first).
+          bun run build --profile=release-local --webkit=local --baseline=on --target=WebKit
+          bun run build --profile=release-local --webkit=local --baseline=on
+
+      - name: Upload CLoop bun.exe artifact
+        if: ${{ inputs.build_cloop_variant }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: bun-penryn-cloop-windows-x64
+          path: |
+            build/release-local/bun.exe
+            build/release-local/bun-profile.exe
+          if-no-files-found: warn

@@ -1,0 +1,25 @@
+diff --git a/scripts/build/flags.ts b/scripts/build/flags.ts
+index 375c66a..5b40708 100644
+--- a/scripts/build/flags.ts
++++ b/scripts/build/flags.ts
+@@ -68,9 +68,18 @@ export const cpuTargetFlags: Flag[] = [
+     desc: "ARM64 Windows: clang-cl prefix required (/clang: passes to clang)",
+   },
+   {
+-    flag: "-march=nehalem",
++    // Default unchanged: -march=nehalem (SSE4.2, no AVX). Override with
++    // BUN_CPU_MARCH=-march=penryn (or any other -march value) to target
++    // older chips that lack SSE4.2/POPCNT, e.g. Core 2 Duo/Quad
++    // (Wolfdale/Yorkfield, Penryn family — SSE4.1 only). This only changes
++    // what the C++ compiler does to Bun's own sources + JSC/WTF/bmalloc
++    // when WebKit is built locally (webkit=local) — it does NOT change
++    // whether JSC's JIT emits SSE4.2/AVX instructions at *runtime* when
++    // compiling JS on the fly. See docs/ARCHITECTURE.md in the
++    // bun-penryn-port handoff package for why those are separate problems.
++    flag: process.env.BUN_CPU_MARCH ?? "-march=nehalem",
+     when: c => c.x64 && c.baseline,
+-    desc: "x64 baseline: Nehalem (2008) — no AVX, broadest compatibility",
++    desc: "x64 baseline: Nehalem (2008) by default — no AVX, broadest compatibility. Overridable via BUN_CPU_MARCH.",
+   },
+   {
+     flag: "-march=haswell",
