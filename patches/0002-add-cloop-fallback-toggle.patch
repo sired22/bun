@@ -1,8 +1,8 @@
 diff --git a/scripts/build/deps/webkit.ts b/scripts/build/deps/webkit.ts
-index 4e389ea..692b06b 100644
+index 4e389ea..e82680c 100644
 --- a/scripts/build/deps/webkit.ts
 +++ b/scripts/build/deps/webkit.ts
-@@ -330,7 +330,26 @@ export const webkit: Dependency = {
+@@ -330,7 +330,43 @@ export const webkit: Dependency = {
        PORT: "JSCOnly",
        ENABLE_STATIC_JSC: "ON",
        USE_THIN_ARCHIVES: "OFF",
@@ -24,8 +24,25 @@ index 4e389ea..692b06b 100644
 +      // option, and naming it BUN_JSC_CLOOP collided with that
 +      // reserved namespace and broke the bootstrap binary itself
 +      // before the build script ever ran. See docs/DECISIONS.md #15.
++      //
++      // ENABLE_SAMPLING_PROFILER and ENABLE_WEBASSEMBLY both hard-
++      // conflict with ENABLE_C_LOOP in WebKit's own CMake (checked
++      // every WEBKIT_OPTION_CONFLICT(... ENABLE_C_LOOP) rule directly
++      // in Source/cmake/WebKitFeatures.cmake rather than discovering
++      // them one at a time across separate failed runs — see
++      // docs/DECISIONS.md #16). Both are safe to drop for this
++      // JIT-less variant: losing the CPU sampling profiler and Wasm
++      // support doesn't affect plain JS execution, which is what this
++      // variant exists to test.
 +      ...(process.env.PENRYN_BUILD_CLOOP === "1"
-+        ? { ENABLE_C_LOOP: "ON", ENABLE_JIT: "OFF", ENABLE_DFG_JIT: "OFF", ENABLE_FTL_JIT: "OFF" }
++        ? {
++            ENABLE_C_LOOP: "ON",
++            ENABLE_JIT: "OFF",
++            ENABLE_DFG_JIT: "OFF",
++            ENABLE_FTL_JIT: "OFF",
++            ENABLE_SAMPLING_PROFILER: "OFF",
++            ENABLE_WEBASSEMBLY: "OFF",
++          }
 +        : { ENABLE_FTL_JIT: "ON" }),
        CMAKE_EXPORT_COMPILE_COMMANDS: "ON",
        USE_BUN_JSC_ADDITIONS: "ON",
