@@ -21,6 +21,12 @@ name: build-bun-penryn-windows
 # Not yet confirmed: a clean run start-to-finish with a downloadable
 # bun.exe, or how that binary behaves on the real E8400.
 #
+# Caching: ccache's directory now persists across runs via
+# actions/cache (#17) — every run before this cached nothing across
+# the VM teardown, so every iteration paid full from-zero compile
+# cost regardless of how small the actual change was. This run
+# onward should be faster once the cache is warm.
+#
 # Output: a bun.exe artifact, attached to the completed run, that you
 # download and copy to the E8400 for the real test (script
 # 02-test-artifact.sh).
@@ -81,6 +87,40 @@ jobs:
       - name: Install nasm (needed for Windows x64 BoringSSL asm)
         shell: pwsh
         run: choco install nasm -y --no-progress
+
+      - name: Set up persistent ccache directory
+        shell: pwsh
+        run: |
+          # GitHub tears down the whole VM after every run, so without
+          # this, ccache (already wired in by Bun's own build via
+          # CMAKE_C/CXX_COMPILER_LAUNCHER — visible in any build log as
+          # ccache.exe wrapping clang-cl) never gets to actually cache
+          # anything across runs; every iteration recompiles from zero,
+          # which is most of why this has been so slow to iterate on.
+          # actions/cache below persists this directory across runs.
+          # Setting CCACHE_DIR explicitly rather than relying on
+          # ccache's platform default, so the cache step below has a
+          # known, fixed path to save/restore regardless of how this
+          # particular ccache build resolves its default on Windows.
+          New-Item -ItemType Directory -Force -Path C:\ccache | Out-Null
+          echo "CCACHE_DIR=C:\ccache" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          echo "CCACHE_MAXSIZE=8G" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Restore ccache from previous runs
+        uses: actions/cache@v4
+        with:
+          path: C:\ccache
+          # One shared cache across JIT and CLoop variants and across
+          # patch iterations — ccache keys each entry on the actual
+          # preprocessed source + exact compiler flags, so it's safe to
+          # share; a changed flag (e.g. -march=penryn vs the CLoop
+          # ENABLE_* set) just means that particular entry misses and
+          # gets recompiled+cached fresh, not that the whole cache is
+          # wrong. restore-keys lets a run still get a partial warm
+          # cache even if the exact key doesn't match.
+          key: ccache-windows-penryn-${{ github.run_id }}
+          restore-keys: |
+            ccache-windows-penryn-
 
       - name: Apply this project's patches
         shell: bash
