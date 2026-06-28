@@ -83,6 +83,12 @@ jobs:
           git apply patches/0001-add-penryn-baseline-override.patch
           git apply --check patches/0002-add-cloop-fallback-toggle.patch
           git apply patches/0002-add-cloop-fallback-toggle.patch
+          # Unrelated to the penryn work — a real, pre-existing build
+          # break on bun's main branch under this exact toolchain. See
+          # docs/DECISIONS.md #12. Worth periodically checking whether
+          # this is still needed (upstream may fix it independently).
+          git apply --check patches/0003-fix-rescle-locale-empty-build-error.patch
+          git apply patches/0003-fix-rescle-locale-empty-build-error.patch
           git diff --stat
 
       - name: Clone pinned WebKit fork commit (local WebKit build)
