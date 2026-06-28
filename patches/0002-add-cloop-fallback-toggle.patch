@@ -1,20 +1,30 @@
 diff --git a/scripts/build/deps/webkit.ts b/scripts/build/deps/webkit.ts
-index 4e389ea..a5ef038 100644
+index 4e389ea..692b06b 100644
 --- a/scripts/build/deps/webkit.ts
 +++ b/scripts/build/deps/webkit.ts
-@@ -330,7 +330,16 @@ export const webkit: Dependency = {
+@@ -330,7 +330,26 @@ export const webkit: Dependency = {
        PORT: "JSCOnly",
        ENABLE_STATIC_JSC: "ON",
        USE_THIN_ARCHIVES: "OFF",
 -      ENABLE_FTL_JIT: "ON",
-+      // BUN_JSC_CLOOP=1: fall back to the portable CLoop interpreter
-+      // instead of the JIT. Same WebKit option used upstream for
-+      // CPU/platform combos that can't safely JIT (e.g. WPEWebKit's
-+      // ARMv5/ARMv6 Buildroot config). Eliminates JIT-emitted machine
-+      // code at runtime entirely, at a real perf cost — see
-+      // docs/ARCHITECTURE.md ("layer 2") in the bun-penryn-port
-+      // handoff package for why this exists. No-op unless set.
-+      ...(process.env.BUN_JSC_CLOOP === "1"
++      // PENRYN_BUILD_CLOOP=1: fall back to the portable CLoop
++      // interpreter instead of the JIT. Same WebKit option used
++      // upstream for CPU/platform combos that can't safely JIT (e.g.
++      // WPEWebKit's ARMv5/ARMv6 Buildroot config). Eliminates
++      // JIT-emitted machine code at runtime entirely, at a real perf
++      // cost — see docs/ARCHITECTURE.md ("layer 2") in the
++      // bun-penryn-port handoff package for why this exists. No-op
++      // unless set.
++      //
++      // NOT named BUN_JSC_* on purpose: Bun's own bootstrap binary
++      // treats any BUN_JSC_<name> env var as a runtime JSC engine
++      // option override (validated against JSC's OptionsList.h) and
++      // refuses to start at all if <name> isn't a real option — this
++      // is a CMake-configure-time build flag, not a JSC runtime
++      // option, and naming it BUN_JSC_CLOOP collided with that
++      // reserved namespace and broke the bootstrap binary itself
++      // before the build script ever ran. See docs/DECISIONS.md #15.
++      ...(process.env.PENRYN_BUILD_CLOOP === "1"
 +        ? { ENABLE_C_LOOP: "ON", ENABLE_JIT: "OFF", ENABLE_DFG_JIT: "OFF", ENABLE_FTL_JIT: "OFF" }
 +        : { ENABLE_FTL_JIT: "ON" }),
        CMAKE_EXPORT_COMPILE_COMMANDS: "ON",

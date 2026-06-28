@@ -171,7 +171,7 @@ jobs:
         shell: pwsh
         env:
           BUN_CPU_MARCH: "-march=penryn"
-          BUN_JSC_CLOOP: "1"
+          PENRYN_BUILD_CLOOP: "1"
         run: |
           # Rebuilding WebKit under a different config in the SAME checkout
           # may not cleanly invalidate prior CMake cache — if this errors
