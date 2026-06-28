@@ -9,14 +9,21 @@ name: build-bun-penryn-windows
 # preinstalled on that image. You never install or configure Visual
 # Studio yourself; this is the whole point of building it this way.
 #
-# UNTESTED end-to-end as written — built directly from Bun's own
-# building-windows docs and source, but I have not run this workflow
-# myself. Treat the first run as a debugging session, not a sure
-# thing. See docs/DECISIONS.md #9.
+# Real run history so far (see docs/DECISIONS.md for full writeups):
+# run #1: bootstrap worked, failed on wrong LLVM version (fixed, #11)
+# run #2: WebKit compiled clean under -march=penryn (the core
+#         hypothesis of this project, confirmed for real), then hit an
+#         unrelated pre-existing build bug in bun's own source (fixed
+#         via patch 0003, #12), AND a bug in this workflow's own
+#         artifact path that silently dropped the built exe (fixed,
+#         #13 — the path is now discovered dynamically instead of
+#         hardcoded, so this shouldn't recur the same way).
+# Not yet confirmed: a clean run start-to-finish with a downloadable
+# bun.exe, or how that binary behaves on the real E8400.
 #
 # Output: a bun.exe artifact, attached to the completed run, that you
 # download and copy to the E8400 for the real test (script
-# 05-test-on-target.ps1).
+# 02-test-artifact.sh).
 
 on:
   workflow_dispatch:
@@ -112,19 +119,30 @@ jobs:
           BUN_CPU_MARCH: "-march=penryn"
         run: bun run build --profile=release-local --webkit=local --baseline=on
 
-      - name: Locate the built exe (path is a best guess — see docs/DECISIONS.md #9)
+      - name: Stage the built exe(s) for upload (path confirmed by run #2 — see docs/DECISIONS.md #13)
         shell: pwsh
         run: |
-          Get-ChildItem -Recurse -Filter "bun.exe" build | Select-Object FullName
-          Get-ChildItem -Recurse -Filter "bun-profile.exe" build | Select-Object FullName
+          # The first real run showed the build actually lands at
+          # build/release/bun.exe — NOT build/release-local/bun.exe as
+          # originally guessed from the --profile name. Discovering it
+          # dynamically here instead of hardcoding a path again, so a
+          # future profile-naming change doesn't silently break this
+          # the same way (this is what actually happened last time).
+          New-Item -ItemType Directory -Force -Path artifact-staging | Out-Null
+          $exes = @(Get-ChildItem -Recurse -Filter "bun.exe" build -ErrorAction SilentlyContinue) +
+                  @(Get-ChildItem -Recurse -Filter "bun-profile.exe" build -ErrorAction SilentlyContinue)
+          if (-not $exes) {
+            Write-Error "No bun.exe / bun-profile.exe found anywhere under build/ - check the build log above; the build itself may have failed."
+            exit 1
+          }
+          foreach ($f in $exes) { Copy-Item $f.FullName -Destination artifact-staging -Force }
+          Get-ChildItem artifact-staging | Select-Object FullName
 
       - name: Upload bun.exe artifact
         uses: actions/upload-artifact@v4
         with:
           name: bun-penryn-windows-x64
-          path: |
-            build/release-local/bun.exe
-            build/release-local/bun-profile.exe
+          path: artifact-staging/*.exe
           if-no-files-found: warn
 
       - name: Locate and upload codegen output (reusable across every -march variant — see docs/ARCHITECTURE.md "Layer 0")
@@ -162,12 +180,23 @@ jobs:
           bun run build --profile=release-local --webkit=local --baseline=on --target=WebKit
           bun run build --profile=release-local --webkit=local --baseline=on
 
+      - name: Stage the CLoop exe(s) for upload
+        if: ${{ inputs.build_cloop_variant }}
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path artifact-staging-cloop | Out-Null
+          $exes = @(Get-ChildItem -Recurse -Filter "bun.exe" build -ErrorAction SilentlyContinue) +
+                  @(Get-ChildItem -Recurse -Filter "bun-profile.exe" build -ErrorAction SilentlyContinue)
+          if (-not $exes) {
+            Write-Error "No bun.exe / bun-profile.exe found anywhere under build/ after the CLoop rebuild - check the log above."
+            exit 1
+          }
+          foreach ($f in $exes) { Copy-Item $f.FullName -Destination artifact-staging-cloop -Force }
+
       - name: Upload CLoop bun.exe artifact
         if: ${{ inputs.build_cloop_variant }}
         uses: actions/upload-artifact@v4
         with:
           name: bun-penryn-cloop-windows-x64
-          path: |
-            build/release-local/bun.exe
-            build/release-local/bun-profile.exe
+          path: artifact-staging-cloop/*.exe
           if-no-files-found: warn
