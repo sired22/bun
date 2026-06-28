@@ -1,0 +1,219 @@
+diff --git a/src/jsc/bindings/BunCPUProfiler.cpp b/src/jsc/bindings/BunCPUProfiler.cpp
+index 3166d2e..393bd17 100644
+--- a/src/jsc/bindings/BunCPUProfiler.cpp
++++ b/src/jsc/bindings/BunCPUProfiler.cpp
+@@ -45,6 +45,8 @@ bool isCPUProfilerRunning()
+     return s_isProfilerRunning;
+ }
+ 
++#if ENABLE(SAMPLING_PROFILER)
++
+ void startCPUProfiler(JSC::VM& vm)
+ {
+     // Capture the wall clock time when profiling starts (before creating stopwatch)
+@@ -928,6 +930,30 @@ void stopCPUProfiler(JSC::VM& vm, WTF::String* outJSON, WTF::String* outText)
+     }
+ }
+ 
++#else
++
++// SamplingProfiler isn't compiled into this build (e.g. the CLoop/JIT-less
++// configuration, which WebKit's own CMake requires disabling alongside
++// ENABLE_C_LOOP — see docs/DECISIONS.md in the bun-penryn-port handoff
++// package). Mirror the existing graceful "no profiler" handling these
++// functions already had for the !profiler case, rather than silently
++// claiming success.
++
++void startCPUProfiler(JSC::VM&)
++{
++    // Intentionally a no-op: nothing to start.
++}
++
++void stopCPUProfiler(JSC::VM&, WTF::String* outJSON, WTF::String* outText)
++{
++    if (outJSON)
++        *outJSON = WTF::String();
++    if (outText)
++        *outText = WTF::String();
++}
++
++#endif // ENABLE(SAMPLING_PROFILER)
++
+ } // namespace Bun
+ 
+ extern "C" void Bun__startCPUProfiler(JSC::VM* vm)
+diff --git a/src/jsc/bindings/NodeVM.cpp b/src/jsc/bindings/NodeVM.cpp
+index fd006bc..c4fc290 100644
+--- a/src/jsc/bindings/NodeVM.cpp
++++ b/src/jsc/bindings/NodeVM.cpp
+@@ -920,7 +920,16 @@ JSC_DEFINE_HOST_FUNCTION(jsNodeVmWasmDisallowed, (JSC::JSGlobalObject * globalOb
+ {
+     VM& vm = globalObject->vm();
+     auto scope = DECLARE_THROW_SCOPE(vm);
++#if ENABLE(WEBASSEMBLY)
+     scope.throwException(globalObject, JSC::createJSWebAssemblyCompileError(globalObject, vm, "Wasm code generation disallowed by embedder"_s));
++#else
++    // WebAssembly isn't compiled into this build (e.g. the CLoop/JIT-less
++    // configuration — see docs/DECISIONS.md in the bun-penryn-port handoff
++    // package). There's no Wasm-specific error type to construct, but the
++    // intent (deny Wasm code generation) still holds, so throw a generic
++    // error with the same message instead.
++    scope.throwException(globalObject, createError(globalObject, "Wasm code generation disallowed by embedder"_s));
++#endif
+     return {};
+ }
+ 
+@@ -930,7 +939,11 @@ JSC_DEFINE_HOST_FUNCTION(jsNodeVmWasmCompileDisallowed, (JSC::JSGlobalObject * g
+ {
+     VM& vm = globalObject->vm();
+     auto scope = DECLARE_THROW_SCOPE(vm);
++#if ENABLE(WEBASSEMBLY)
+     JSObject* error = JSC::createJSWebAssemblyCompileError(globalObject, vm, "Wasm code generation disallowed by embedder"_s);
++#else
++    JSObject* error = createError(globalObject, "Wasm code generation disallowed by embedder"_s);
++#endif
+     RETURN_IF_EXCEPTION(scope, {});
+     RELEASE_AND_RETURN(scope, JSValue::encode(JSC::JSPromise::rejectedPromise(globalObject, error)));
+ }
+diff --git a/src/jsc/bindings/NodeVMScript.cpp b/src/jsc/bindings/NodeVMScript.cpp
+index 90d1df5..b3a4a3c 100644
+--- a/src/jsc/bindings/NodeVMScript.cpp
++++ b/src/jsc/bindings/NodeVMScript.cpp
+@@ -156,6 +156,7 @@ constructScript(JSGlobalObject* globalObject, CallFrame* callFrame, JSValue newT
+         if (!unlinkedBlock) {
+             script->cachedDataRejected(TriState::True);
+         } else {
++#if ENABLE(JIT)
+             JSC::JSScope* jsScope = globalObject->globalScope();
+             JSC::CodeBlock* codeBlock = nullptr;
+             {
+@@ -171,6 +172,15 @@ constructScript(JSGlobalObject* globalObject, CallFrame* callFrame, JSValue newT
+             } else {
+                 script->cachedDataRejected(TriState::True);
+             }
++#else
++            // No JIT in this build (e.g. the CLoop configuration — see
++            // docs/DECISIONS.md in the bun-penryn-port handoff package), so
++            // there's no way to verify the deserialized bytecode the way
++            // this check normally does. Conservatively reject it, same as
++            // the !unlinkedBlock case above — always correct, just forces a
++            // fresh compile instead of trusting unverified cached bytecode.
++            script->cachedDataRejected(TriState::True);
++#endif
+         }
+     } else if (produceCachedData) {
+         script->cacheBytecode();
+diff --git a/src/jsc/bindings/NodeVMSourceTextModule.cpp b/src/jsc/bindings/NodeVMSourceTextModule.cpp
+index ae87e5b..6666e2a 100644
+--- a/src/jsc/bindings/NodeVMSourceTextModule.cpp
++++ b/src/jsc/bindings/NodeVMSourceTextModule.cpp
+@@ -132,6 +132,7 @@ NodeVMSourceTextModule* NodeVMSourceTextModule::create(VM& vm, JSGlobalObject* g
+     RETURN_IF_EXCEPTION(scope, nullptr);
+ 
+     if (unlinkedBlock) {
++#if ENABLE(JIT)
+         JSScope* jsScope = globalObject->globalScope();
+         CodeBlock* codeBlock = nullptr;
+         {
+@@ -148,6 +149,13 @@ NodeVMSourceTextModule* NodeVMSourceTextModule::create(VM& vm, JSGlobalObject* g
+                 return ptr;
+             }
+         }
++#else
++        // No JIT in this build (e.g. the CLoop configuration — see
++        // docs/DECISIONS.md in the bun-penryn-port handoff package). No way
++        // to verify the deserialized bytecode the way this normally does;
++        // fall through to the same "rejected" error below rather than
++        // trusting unverified cached bytecode.
++#endif
+     }
+ 
+     throwError(globalObject, scope, ErrorCode::ERR_VM_MODULE_CACHED_DATA_REJECTED, "cachedData buffer was rejected"_s);
+diff --git a/src/jsc/modules/BunJSCModule.h b/src/jsc/modules/BunJSCModule.h
+index deb683b..13bc1be 100644
+--- a/src/jsc/modules/BunJSCModule.h
++++ b/src/jsc/modules/BunJSCModule.h
+@@ -438,6 +438,7 @@ JSC_DEFINE_HOST_FUNCTION(functionStartSamplingProfiler,
+         JSC::CallFrame* callFrame))
+ {
+     auto& vm = JSC::getVM(globalObject);
++#if ENABLE(SAMPLING_PROFILER)
+     JSC::SamplingProfiler& samplingProfiler = vm.ensureSamplingProfiler(WTF::Stopwatch::create());
+ 
+     JSC::JSValue directoryValue = callFrame->argument(0);
+@@ -469,6 +470,15 @@ JSC_DEFINE_HOST_FUNCTION(functionStartSamplingProfiler,
+     samplingProfiler.noticeCurrentThreadAsJSCExecutionThread();
+     samplingProfiler.start();
+     return JSC::JSValue::encode(jsUndefined());
++#else
++    // SamplingProfiler isn't compiled into this build (e.g. the CLoop
++    // configuration — see docs/DECISIONS.md in the bun-penryn-port handoff
++    // package). Throw a clear error rather than silently doing nothing.
++    auto scope = DECLARE_THROW_SCOPE(vm);
++    return JSC::JSValue::encode(throwException(
++        globalObject, scope,
++        createError(globalObject, "Sampling profiler is not available in this build"_s)));
++#endif
+ }
+ 
+ JSC_DECLARE_HOST_FUNCTION(functionSamplingProfilerStackTraces);
+@@ -480,6 +490,7 @@ JSC_DEFINE_HOST_FUNCTION(functionSamplingProfilerStackTraces,
+     JSC::DeferTermination deferScope(vm);
+     auto scope = DECLARE_THROW_SCOPE(vm);
+ 
++#if ENABLE(SAMPLING_PROFILER)
+     if (!vm.samplingProfiler())
+         return JSC::JSValue::encode(throwException(
+             globalObject, scope,
+@@ -489,6 +500,13 @@ JSC_DEFINE_HOST_FUNCTION(functionSamplingProfilerStackTraces,
+     JSC::EncodedJSValue result = JSC::JSValue::encode(JSONParse(globalObject, jsonString));
+     scope.releaseAssertNoException();
+     return result;
++#else
++    // SamplingProfiler isn't compiled into this build — see
++    // docs/DECISIONS.md in the bun-penryn-port handoff package.
++    return JSC::JSValue::encode(throwException(
++        globalObject, scope,
++        createError(globalObject, "Sampling profiler is not available in this build"_s)));
++#endif
+ }
+ 
+ JSC_DECLARE_HOST_FUNCTION(functionGetRandomSeed);
+@@ -582,7 +600,14 @@ JSC_DECLARE_HOST_FUNCTION(functionTotalCompileTime);
+ JSC_DEFINE_HOST_FUNCTION(functionTotalCompileTime,
+     (JSGlobalObject*, CallFrame*))
+ {
++#if ENABLE(JIT)
+     return JSValue::encode(jsNumber(JIT::totalCompileTime().milliseconds()));
++#else
++    // No JIT in this build (see docs/DECISIONS.md in the bun-penryn-port
++    // handoff package) — zero is the literally correct answer, not a
++    // degraded fallback: no JIT compilation ever happens.
++    return JSValue::encode(jsNumber(0));
++#endif
+ }
+ 
+ JSC_DECLARE_HOST_FUNCTION(functionGetProtectedObjects);
+@@ -661,6 +686,7 @@ JSC_DEFINE_HOST_FUNCTION(functionSetTimeZone, (JSGlobalObject * globalObject, Ca
+ JSC_DEFINE_HOST_FUNCTION(functionRunProfiler, (JSGlobalObject * globalObject, CallFrame* callFrame))
+ {
+     auto& vm = JSC::getVM(globalObject);
++#if ENABLE(SAMPLING_PROFILER)
+     JSC::SamplingProfiler& samplingProfiler = vm.ensureSamplingProfiler(WTF::Stopwatch::create());
+ 
+     JSC::JSValue callbackValue = callFrame->argument(0);
+@@ -772,6 +798,14 @@ JSC_DEFINE_HOST_FUNCTION(functionRunProfiler, (JSGlobalObject * globalObject, Ca
+ 
+     JSValue result = report(vm, globalObject);
+     RELEASE_AND_RETURN(throwScope, JSValue::encode(result));
++#else
++    // SamplingProfiler isn't compiled into this build — see
++    // docs/DECISIONS.md in the bun-penryn-port handoff package.
++    auto throwScope = DECLARE_THROW_SCOPE(vm);
++    return JSValue::encode(throwException(
++        globalObject, throwScope,
++        createError(globalObject, "Sampling profiler is not available in this build"_s)));
++#endif
+ }
+ 
+ JSC_DECLARE_HOST_FUNCTION(functionGenerateHeapSnapshotForDebugging);

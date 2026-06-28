@@ -136,6 +136,14 @@ jobs:
           # this is still needed (upstream may fix it independently).
           git apply --check patches/0003-fix-rescle-locale-empty-build-error.patch
           git apply patches/0003-fix-rescle-locale-empty-build-error.patch
+          # Bun's own bindings call directly into JSC's JIT/SamplingProfiler/
+          # WebAssembly classes from a few optional features (vm.Script's
+          # bytecode-cache verification, the CPU profiler, bun:jsc's
+          # introspection APIs). Harmless no-op for the normal JIT build —
+          # only matters for the CLoop variant, where those JSC features are
+          # off. See docs/DECISIONS.md #22.
+          git apply --check patches/0007-guard-jit-sampling-profiler-wasm-feature-deps.patch
+          git apply patches/0007-guard-jit-sampling-profiler-wasm-feature-deps.patch
           git diff --stat
 
       - name: Clone pinned WebKit fork commit (local WebKit build)
