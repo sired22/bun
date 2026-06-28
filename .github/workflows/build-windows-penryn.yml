@@ -153,11 +153,14 @@ jobs:
           set -euo pipefail
           PATCH4="$(pwd)/patches/0004-domjit-effect-guard-dfg-kinds.patch"
           PATCH5="$(pwd)/patches/0005-add-missing-structureinlines-includes.patch"
+          PATCH6="$(pwd)/patches/0006-add-missing-scopeexit-includes.patch"
           cd vendor/WebKit
           git apply --check "$PATCH4"
           git apply "$PATCH4"
           git apply --check "$PATCH5"
           git apply "$PATCH5"
+          git apply --check "$PATCH6"
+          git apply "$PATCH6"
 
       - name: Build WebKit (JSC/WTF/bmalloc) only — fails fast if -march=penryn breaks the compile
         shell: pwsh

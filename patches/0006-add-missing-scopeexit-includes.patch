@@ -1,0 +1,24 @@
+diff --git a/Source/JavaScriptCore/runtime/JSModuleLoader.cpp b/Source/JavaScriptCore/runtime/JSModuleLoader.cpp
+index 4ebd937f..04cd33be 100644
+--- a/Source/JavaScriptCore/runtime/JSModuleLoader.cpp
++++ b/Source/JavaScriptCore/runtime/JSModuleLoader.cpp
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "config.h"
++#include <wtf/Scope.h>
+ #include "JSModuleLoader.h"
+ #include "ProgramExecutable.h"
+ 
+diff --git a/Source/JavaScriptCore/tools/JSDollarVM.cpp b/Source/JavaScriptCore/tools/JSDollarVM.cpp
+index 3b44f196..13510ea1 100644
+--- a/Source/JavaScriptCore/tools/JSDollarVM.cpp
++++ b/Source/JavaScriptCore/tools/JSDollarVM.cpp
+@@ -24,6 +24,7 @@
+  */
+ 
+ #include "config.h"
++#include <wtf/Scope.h>
+ #include "StructureInlines.h"
+ #include "JSDollarVM.h"
+ 
