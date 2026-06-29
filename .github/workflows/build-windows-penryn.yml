@@ -144,6 +144,11 @@ jobs:
           # off. See docs/DECISIONS.md #22.
           git apply --check patches/0007-guard-jit-sampling-profiler-wasm-feature-deps.patch
           git apply patches/0007-guard-jit-sampling-profiler-wasm-feature-deps.patch
+          # Same DFG-kind-constructor gap as patch 0004 — turned out Bun's
+          # own webcore bindings use it too, not just WebKit's source. See
+          # docs/DECISIONS.md #23.
+          git apply --check patches/0008-guard-bun-domjit-effect-kinds-usage.patch
+          git apply patches/0008-guard-bun-domjit-effect-kinds-usage.patch
           git diff --stat
 
       - name: Clone pinned WebKit fork commit (local WebKit build)

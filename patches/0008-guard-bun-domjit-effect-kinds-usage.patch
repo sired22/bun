@@ -1,0 +1,22 @@
+diff --git a/src/jsc/bindings/webcore/JSPerformance.cpp b/src/jsc/bindings/webcore/JSPerformance.cpp
+index 8f0fa04..73f225e 100644
+--- a/src/jsc/bindings/webcore/JSPerformance.cpp
++++ b/src/jsc/bindings/webcore/JSPerformance.cpp
+@@ -270,7 +270,17 @@ void JSPerformance::finishCreation(VM& vm)
+     static const JSC::DOMJIT::Signature DOMJITSignatureForPerformanceNow(
+         functionPerformanceNowWithoutTypeCheck,
+         JSPerformance::info(),
++#if ENABLE(DFG_JIT)
+         JSC::DOMJIT::Effect::forWriteKinds(DFG::AbstractHeapKind::SideState),
++#else
++        // No DFG_JIT in this build (e.g. CLoop — see docs/DECISIONS.md in
++        // the bun-penryn-port handoff package). DOMJIT::Effect's kind-
++        // specific constructors only exist when DFG_JIT is on (patch
++        // 0004 guards them in WebKit's DOMJITEffect.h) — fall back to the
++        // conservative "could read/write anything" form, which is safe
++        // since nothing analyzes DOMJIT signatures without DFG/FTL anyway.
++        JSC::DOMJIT::Effect::forReadWrite(JSC::DOMJIT::HeapRange::top(), JSC::DOMJIT::HeapRange::top()),
++#endif
+         SpecDoubleReal);
+ 
+     JSFunction* now = JSFunction::create(
